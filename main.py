@@ -1,12 +1,13 @@
-import pygame
+import pygame, os
 from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 
 def main():
+    os.environ['SDL_VIDEO_WINDOW_POS'] = '1920,0'
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT),display=0)
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
 
     updatable = pygame.sprite.Group()
@@ -29,6 +30,11 @@ def main():
             
         for obj in updatable:
             obj.update(dt)
+
+        for ast in asteroids:
+            if ast.check_collision(player):
+                print("Game over!")
+                return pygame.QUIT
 
         screen.fill("black")
 
