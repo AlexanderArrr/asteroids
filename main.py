@@ -3,6 +3,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 def main():
     os.environ['SDL_VIDEO_WINDOW_POS'] = '1920,0'
@@ -13,9 +14,11 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    Shot.containers = (shots, updatable, drawable)
 
     Asteroid.containers = (updatable, drawable, asteroids)
     AsteroidField.containers = updatable
